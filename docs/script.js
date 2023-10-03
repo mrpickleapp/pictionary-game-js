@@ -386,11 +386,11 @@ async function setup() {
     this.setCurrentCategory();
 
     resetButton = createButton('clear canvas');
-    resetButton.position(10, DRAW_HEIGHT + PADDING + INSTRUCTION_HEIGHT + PADDING + 35);
+    resetButton.position(10, DRAW_HEIGHT + PADDING + INSTRUCTION_HEIGHT + PADDING + 10);
     resetButton.mousePressed(this.resetCanvas);
 
     nextButton = createButton('next category');
-    nextButton.position(10, DRAW_HEIGHT + PADDING + INSTRUCTION_HEIGHT + PADDING + 60);
+    nextButton.position(10, DRAW_HEIGHT + PADDING + INSTRUCTION_HEIGHT + PADDING + 35);
     nextButton.mousePressed(this.nextCategory);
 }
 
