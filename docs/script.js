@@ -370,6 +370,9 @@ let sortedPredScores;
 let instruction = 'loading model...';
 let current_category;
 
+let resetButton;
+let nextButton;
+
 async function setup() {
     frameRate(30);
     canvas = createCanvas(DRAW_WIDTH, DRAW_HEIGHT + PADDING + INSTRUCTION_HEIGHT + PADDING + FOOTER_HEIGHT);
@@ -381,6 +384,14 @@ async function setup() {
 
     this.set_category_ids();
     this.setCurrentCategory();
+
+    resetButton = createButton('clear canvas');
+    resetButton.position(10, DRAW_HEIGHT + PADDING + INSTRUCTION_HEIGHT + PADDING + 35);
+    resetButton.mousePressed(this.resetCanvas);
+
+    nextButton = createButton('next category');
+    nextButton.position(10, DRAW_HEIGHT + PADDING + INSTRUCTION_HEIGHT + PADDING + 60);
+    nextButton.mousePressed(this.nextCategory);
 }
 
 function set_category_ids() {
@@ -449,6 +460,9 @@ function draw() {
             let category = sortedPredCategories[i];
             let score = sortedPredScores[i];
             fill(int(235 - (255 * score)));
+            if (category == current_category) {
+                fill(25, 222, 25);
+            }
             text(category, int(DRAW_WIDTH/2), DRAW_HEIGHT + PADDING + INSTRUCTION_HEIGHT + PADDING + 30 + (40 * i));
         }
     }
@@ -478,6 +492,28 @@ function draw() {
     if (current_stroke[0].length > 1) {
         this.drawStroke(current_stroke); 
     }
+}
+
+function resetCanvas() {
+    drawing = [];
+    current_stroke = [[], []];
+    simplified_drawing = [];
+    last_prediction = undefined;
+    sortedPredictions = undefined;
+    sortedPredCategories = undefined;
+    sortedPredScores = undefined;
+}
+
+function nextCategory() {
+    current_category = categories[Math.floor(Math.random() * categories.length)];
+    instruction = "Draw: " + current_category;
+    drawing = [];
+    current_stroke = [[], []];
+    simplified_drawing = [];
+    last_prediction = undefined;
+    sortedPredictions = undefined;
+    sortedPredCategories = undefined;
+    sortedPredScores = undefined;
 }
 
 function mouseInBounds() {
