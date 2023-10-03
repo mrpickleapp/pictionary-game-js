@@ -1,7 +1,7 @@
 let model;
 let canvas;
 
-const DRAW_WIDTH = 600;
+const DRAW_WIDTH = 400;
 const DRAW_HEIGHT = DRAW_WIDTH;
 
 const PADDING = 10;
